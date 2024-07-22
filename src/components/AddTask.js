@@ -6,12 +6,23 @@ export const AddTask = ({ task, setTask }) => {
   const handleChange = (e) => {
     setInput(e.target.value);
     // console.log(setInput(e.target.value));
+    // console.log(input, "input ko");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(first)
-   
+    const date = new Date();
+    // console.log(e.target.task.value, "e.target.task.value");
+
+    const newTask = {
+      id: Math.random(),
+      taskName: e.target.task.value,
+      dateNow: date.toLocaleString(),
+    };
+    setTask([...task, newTask]);
+    // console.log(task, "task state ho");
+  };
+
   return (
     <section className="addTask">
       <form onSubmit={handleSubmit}>

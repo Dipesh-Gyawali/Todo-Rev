@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 export const ShowTask = ({ task, setTask }) => {
   //   const todoTask = [
-  //     { task: "Task 1", dateNow: new Date() },
-  //     { task: "Task 2", dateNow: new Date() },
+  //     { taskName: "Task 1", dateNow: new Date() },
+  //     { taskName: "Task 2", dateNow: new Date() },
   //   ];
 
   return (
@@ -21,7 +21,7 @@ export const ShowTask = ({ task, setTask }) => {
           return (
             <li key={index}>
               <p>
-                <span className="name">{item.task}</span>
+                <span className="name">{item.taskName}</span>
                 <span className="time">{item.dateNow.toLocaleString()}</span>
               </p>
               <i className="bi bi-pencil-square"></i>
