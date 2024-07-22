@@ -9,7 +9,7 @@ export const AddTask = ({ task, setTask }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input, "aaaaa");
+    // console.log(input, "aaaaa");
 
     const date = new Date();
 
