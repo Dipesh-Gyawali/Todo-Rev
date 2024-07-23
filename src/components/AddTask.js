@@ -16,7 +16,7 @@ export const AddTask = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (editTask.id) {
+    if (editTask.id) {                            //edit garda
       const date = new Date();
 
       const updatedTask = task.map((a) => {
@@ -34,7 +34,7 @@ export const AddTask = ({
       setTask(updatedTask);
       setEditTask({});
       setInput("");
-    } else {
+    } else {                                              //normal submit garda
       // console.log(input, "aaaaa");
       const date = new Date();
       const newTask = {
