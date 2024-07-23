@@ -6,12 +6,28 @@ import { useState } from "react";
 
 function App() {
   const [task, setTask] = useState([]);
+  const [editTask, setEditTask] = useState({});
+  const [input, setInput] = useState("");
 
   return (
     <div className="App">
       <Header />
-      <AddTask task={task} setTask={setTask} />
-      <ShowTask task={task} setTask={setTask} />
+      <AddTask
+        task={task}
+        setTask={setTask}
+        editTask={editTask}
+        setEditTask={setEditTask}
+        input={input}
+        setInput={setInput}
+      />
+      <ShowTask
+        task={task}
+        setTask={setTask}
+        editTask={editTask}
+        setEditTask={setEditTask}
+        input={input}
+        setInput={setInput}
+      />
     </div>
   );
 }

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 
-export const ShowTask = ({ task, setTask }) => {
+export const ShowTask = ({
+  task,
+  setTask,
+  editTask,
+  setEditTask,
+  input,
+  setInput,
+}) => {
   //   const todoTask = [
   //     {id:1, taskName: "Task 1", dateNow: new Date() },
   //     {id:2, taskName: "Task 2", dateNow: new Date() },
@@ -9,6 +16,12 @@ export const ShowTask = ({ task, setTask }) => {
   const handleDelete = (id) => {
     const updatedTask = task.filter((a) => a.id !== id);
     setTask(updatedTask);
+  };
+
+  const handleEdit = (id) => {
+    const edit = task.find((a) => a.id === id);
+    setEditTask(edit);
+    // console.log(editTask, "editTask");
   };
 
   return (
@@ -31,7 +44,10 @@ export const ShowTask = ({ task, setTask }) => {
                 <span className="name">{item.taskName}</span>
                 <span className="time">{item.dateNow.toLocaleString()}</span>
               </p>
-              <i className="bi bi-pencil-square"></i>
+              <i
+                className="bi bi-pencil-square"
+                onClick={() => handleEdit(item.id)}
+              ></i>
               <i
                 className="bi bi-trash"
                 onClick={() => handleDelete(item.id)}
