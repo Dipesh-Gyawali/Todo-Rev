@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 export const AddTask = ({
   task,
@@ -8,44 +8,63 @@ export const AddTask = ({
   input,
   setInput,
 }) => {
+  const refElement = useRef();
+  console.log(refElement.current, "ref");
+
   const handleChange = (e) => {
     setInput(e.target.value);
-    // console.log(input, "iii");
+    if (e.target.value.trim() !== "") {
+      refElement.current.disabled = false;
+    }
+  };
+
+  const handleBlank = () => {
+    console.log("Button disabled due to blank input");
+    refElement.current.disabled = true;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("sub");
 
-    if (editTask.id) {                            //edit garda
-      const date = new Date();
+    if (input.trim() === "") {
+      handleBlank();
+    } else {
+      if (editTask.id) {
+        //edit garda
+        const date = new Date();
 
-      const updatedTask = task.map((a) => {
-        if (a.id === editTask.id) {
-          return {
-            ...a,
-            id: editTask.id,
-            taskName: input,
-            // taskName: e.target.task.value,
-            dateNow: date.toLocaleString(),
-          };
-        }
-        return a;
-      });
-      setTask(updatedTask);
-      setEditTask({});
-      setInput("");
-    } else {                                              //normal submit garda
-      // console.log(input, "aaaaa");
-      const date = new Date();
-      const newTask = {
-        id: Math.random(),
-        taskName: e.target.task.value,
-        // taskName: input,
-        dateNow: date.toLocaleString(),
-      };
-      setTask([...task, newTask]);
-      setInput("");
-      // e.target.task.value = "";
+        const updatedTask = task.map((a) => {
+          if (a.id === editTask.id) {
+            return {
+              ...a,
+              id: editTask.id,
+              taskName: input,
+              // taskName: e.target.task.value,
+              dateNow: date.toLocaleString(),
+            };
+          }
+          return a;
+        });
+        setTask(updatedTask);
+        setEditTask({});
+        setInput("");
+      } else {
+        //normal submit garda
+        // console.log(input, "aaaaa");
+        const date = new Date();
+        const newTask = {
+          id: Math.random(),
+          taskName: e.target.task.value,
+          // taskName: input,
+          dateNow: date.toLocaleString(),
+        };
+        setTask([...task, newTask]);
+        setInput("");
+        // e.target.task.value = "";
+        console.log("sub 2222222");
+        refElement.current.disabled = false;
+      }
     }
   };
 
@@ -61,7 +80,9 @@ export const AddTask = ({
           value={input || editTask.taskName || ""}
           onChange={handleChange}
         />
-        <button type="submit">Add</button>
+        <button ref={refElement} type="submit">
+          Add
+        </button>
       </form>
     </section>
   );
